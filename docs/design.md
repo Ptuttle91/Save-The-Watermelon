@@ -50,3 +50,8 @@ The goal is to build a lightweight terminal-based word game. The player will 'Sa
 * Reveal the Word
 * Prompt to play again or exit the game
 
+#Basic Flow
+## Please See Flow Diagram V.2 in /docs/
+https://github.com/Ptuttle91/Save-The-Watermelon/blob/main/docs/Flow%20Diagram%20V2.jpg
+
+
