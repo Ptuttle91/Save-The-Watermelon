@@ -38,10 +38,15 @@ The goal is to build a lightweight terminal-based word game. The player will 'Sa
 * Load bank of words
 * Display 'ui'; masked word, slices, attempt bank
 
-## Turns
+## Turn State
 * Prompt the player to submit a letter; validate all input
 * If guess is 'corect' (In the word), reveal its position in the 'mask'.
 * If already tried, notify the user with a small prompt
 * If guess is 'incorrect' (Not in the word), decrease 'slices' by 1.
 * At end of each turn, check if win state (all letters guessed) OR lose state (out of slices)
 * Else, continue to next turn.
+
+## End Game State
+* Reveal the Word
+* Prompt to play again or exit the game
+
