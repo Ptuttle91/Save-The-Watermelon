@@ -50,8 +50,16 @@ The goal is to build a lightweight terminal-based word game. The player will 'Sa
 * Reveal the Word
 * Prompt to play again or exit the game
 
-#Basic Flow
+# Basic Flow
 ## Please See Flow Diagram V.2 in /docs/
 https://github.com/Ptuttle91/Save-The-Watermelon/blob/main/docs/Flow%20Diagram%20V2.jpg
 
+# Data Design
 
+## Assignment requires standard library use only
+## Data Classes
+answer: str // This will be the secret word, used in lowercase only
+correct_tries: list[str] // This will be a masked version of the answer, using '_' for unguessed letter)
+guessed: set[str] = field(default_factory=set) // All attempted letters from player input
+slices: int =   // Incorrect attempts remaining
+total_slices: int =   // Maximum otal of incorrect tries
