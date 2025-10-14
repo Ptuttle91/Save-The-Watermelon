@@ -34,7 +34,7 @@ FUNCTION init_state(answer: string, slices: int) -> GameState:
         total_slices=slices
     )
 
-# A helper built for the display. Applies an underscore per length of answer.
+# This will assist with the UI. Applies an underscore per length of answer.
 Function masked_word(state:GameState) -> string:
   RETURN join_with_spaces(state.correct_tries)
 
@@ -160,12 +160,37 @@ LOOP:
   ELSE:
     print("Guessed Letters: " + join_sorted_by_comma(state.guessed))
 
-    letter = _prompt_guess()
+  letter = _prompt_guess()
 
-# This will be the input feedback for a correct/incorrect guess
+  IF already_guessed(state, letter):
+    print("' {letter} ' has already been guessed! Please try another")
+    CONTINUE
 
-# This will be the print series for a win state
-# This will be the print series for a lose state
+  before = state.slices
+  apply_guess(state, letter)
+  after = state.slices
+
+  # This will be the input feedback for a correct/incorrect guess
+  IF after == before AND letter IN state.answer:
+    print(f"Well done! '{letter}' brings us one step closer!")
+  ELIF after < before:
+    print(f"Oh no! '{letter}' isn't in the word, they're getting closer to the watermelon!")
+
+  # This will be the print series for a win state
+  IF is_win(state):
+    print("Congratulations!")
+    print("You are a hero to watermelons everywhere!")
+    print(f"The Secret Word was: {state.answer}")
+    print("Will you keep fighting?")
+
+  # This will be the print series for a lose state
+  IF is_lose(state):
+    print("Oh No!")
+    print("The Watermelon has been SLICED!")
+    print("The secret word was revealed in it's dying breath: {state.answer}!")
+    print("No use in crying over spilled juice, will you keep fighting?"
+
+
 
 # This will print a Fun introduction to the game
 
