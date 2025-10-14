@@ -1,14 +1,14 @@
 # Pseudocode
 
 * This must use the standard library only. To achieve this I am focusing on random, pathlib, and dataclasses.
-* We will keep the logic.py file print free so it can be tested effectively without potential outlier errors.
 * Input fuction must be simple and clean.
 * The core parts of the game must be shown and updated after each attempt (slices, attempts, etc.)
 
 ## src/logic.py
 ### The core mechanics and data structuring of the system. No outputs
 
-I am using dataclass to keep this neat and lightweight.
+* I am using dataclass to keep this neat and lightweight.
+* We will keep the logic.py file print free so it can be tested effectively without potential outlier errors.
 
 ```python
 
@@ -67,4 +67,38 @@ FUNCTION is_lose (state: GameState) -> bool:
   RETURN state.slices <=0
 
 ```
+## src/words.py
 
+* Adding in a default list to help with testing.
+* If word list not loaded, fall to default list.
+* Using file loader.
+* Using lowercase alphabet only.
+* Strip blank lines.
+* For stretch goal, move WordEntry(answer, hint) and parse these lines. Should not need more changes to fit.
+
+```python
+CONST DEFAULT_WORDS = [
+    "snail", "watermelon", "cat", "banana", "wolverine", "orange", "badger", "grape", "antelope", "calamansi",
+]
+
+FUNCTION load_words(path: string | None) -> list[string]:
+  IF path IS NOT None:
+    IF File at path DOES NOT exist:
+      RAISE FileNotFoundError("Error: Word file not found.")
+    lines= read_all_lines_utf8(path)
+    words = []
+    FOR each line IN lines:
+      w = strip(line)
+      IF w IS empty OR starts with('#'): CONTINUE
+      IF w.isalpha() AND w.islower():
+        APPEND w to words
+  ELSE:
+    words = copy_of(DEFAULT_WORDS)
+  IF words IS empty:
+    RAISE ValueError("Error: No Valid Words Available.")
+  RETURN words
+
+FUNCTION choose_answer(words: list[string[, rng: Random | None) -> string:
+  r = rng IF rng NOT None ELSE global_random
+  RETURN r.choice(words)
+```
