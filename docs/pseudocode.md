@@ -3,7 +3,7 @@
 * This must use the standard library only. To achieve this I am focusing on random, pathlib, and dataclasses.
 * We will keep the logic.py file print free so it can be tested effectively without potential outlier errors.
 * Input fuction must be simple and clean.
-* the core parts of the game must be shown and updated after each attempt (slices, attempts, etc.)
+* The core parts of the game must be shown and updated after each attempt (slices, attempts, etc.)
 
 ## src/logic.py
 ### The core mechanics and data structuring of the system. No outputs
@@ -49,18 +49,22 @@ FUNCTION apply_guess(state: GameState, letter: string) -> None:
     RETURN
   # This adds guessed letter to the word bank
   ADD letter TO state.guessed
+  # This reveals the correctly guessed letters
+  IF letter IN state.answer:
+    for i FROM 0 to len(state.answer)-1:
+      if state.answer[i] == letter:
+        state.corred_tries[i] = letter
+  #This subtracts a slice for an incorrect guess.
+  ELSE:
+    state.slices = state.slices -1
 
+# This calls a win-state if _ are all cleared out
+FUNCTION is_win(state: GameState)-> bool:
+  RETURN '_' NOT IN state.correct_tries
 
-
-
-
-# This will reveal all letters in answer matching output without costing a 'slice'
-
-# This will incur a cost of the slice if input = false/falls into else
-
-#T This will call a win-state if _ are all cleared out
-
-# This will call a lose-state when slices = 0 
+# This calls a lose-state when slices = 0
+FUNCTION is_lose (state: GameState) -> bool:
+  RETURN state.slices <=0
 
 ```
 
