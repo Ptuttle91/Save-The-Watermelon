@@ -124,10 +124,18 @@ CONST DEFAULT_SLICES = 7
 #change to = None to force switch to default library
 CONST WORD_FILE = "data/words.txt"
 
-# This strucure prints an introduction to the game
+# This strucure prints an introduction to the game; added error handling
 FUNCTION run() -> None:
   print("Welcome, hero! The Watermelons need your help!"(
   print("Guess the secret word to set them free!")
+  Loop:
+    TRY:
+      _ = play_round(DEFAULT_SLICES)
+    EXCEPT Exception AS ex:
+      print(f"Error! {str(ex)}")
+    IF NOT _prompt_replay():
+      print("Good job! Let's play again sometime!")
+        BREAK
 
 # This structure creates and validate player input (a-z, length of input, etc.)
 FUNCTION _prompt_guess() -> string:
@@ -141,7 +149,7 @@ FUNCTION _prompt_guess() -> string:
       print("Error: Invalid Input. Only letters A-Z can be accepted.")
     RETURN ch
 
-# These will build the function to replay after win or lose state
+# This is thefunction to replay after win or lose state
 FUNCTION _prompt_replay() -> bool:
     LOOP:
         raw = input("Would you like to play again? (y/n): ").strip().lower()
@@ -154,7 +162,7 @@ FUNCTION play_round(slices: int = DEFAULT_SLICES) -> string:
     answer = choose_answer(word_list)
     state = init_state(answer, slices)
 
-  # This is the print series that displays the title and the UI.
+# This is the print series that displays the title and the UI.
 LOOP:
   print("")
   print("Save the Watermelon!")
