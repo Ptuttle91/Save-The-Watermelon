@@ -108,15 +108,36 @@ FUNCTION choose_answer(words: list[string[, rng: Random | None) -> string:
 * UX - make sure already guessed letters are sorted and always displayed.
 * UX - Heed spacing for visual clarity
 * UX - Ensure that outcome of input is clearly stated and fun.
+* Invalid input should re-prompt for input, not count as incorrect guess
+* Duplicate guesses should not count as incorrect
+* Define error is word import list is invalid
+* Keep words/input processed as lowercase to keep streamline
 
 ```python
-# This will hold import FROM logic
-# This will hold import FROM words
-# This will validate the input (a-z, length of input, etc.)
-# This will declare constants for default value of slices
-# This will declare the constant from a word file or the default
+# These import the logic and word bank from the other sections of the program.
+IMPORT from logic: init_state, masked_word, already_guessed, apply_guess, is_win, is_lose
+IMPORT from words: load_words, choose_answer
 
-# This will build the functions of player input
+# This declares constants for default value of slices
+CONST DEFAULT_SLICES = 7
+
+#change to = None to force switch to default library
+CONST WORD_FILE = "data/words.txt"
+
+# This structure will create and validate player input (a-z, length of input, etc.)
+FUNCTION _prompt_guess() -> string:
+  LOOP:
+    raw = input("Enter a single letter to guess: ").strip()
+    IF len(raw) != 1:
+      print("Error: Please enter one character at a time.")
+      continue
+    ch = to_lower(raw)
+    IF ch NOT IN 'a'.. 'z':
+      print("Error: Only letters A-Z can be accepted.")
+    RETURN ch
+
+
+
 # This will build the function prompt to replay after win or lose state
 
 # This will be the print series that displays:
