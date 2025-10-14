@@ -124,19 +124,6 @@ CONST DEFAULT_SLICES = 7
 #change to = None to force switch to default library
 CONST WORD_FILE = "data/words.txt"
 
-# This strucure prints an introduction to the game; added error handling
-FUNCTION run() -> None:
-  print("Welcome, hero! The Watermelons need your help!"(
-  print("Guess the secret word to set them free!")
-  Loop:
-    TRY:
-      _ = play_round(DEFAULT_SLICES)
-    EXCEPT Exception AS ex:
-      print(f"Error! {str(ex)}")
-    IF NOT _prompt_replay():
-      print("Good job! Let's play again sometime!")
-        BREAK
-
 # This structure creates and validate player input (a-z, length of input, etc.)
 FUNCTION _prompt_guess() -> string:
   LOOP:
@@ -203,13 +190,19 @@ LOOP:
     print("The secret word was revealed in it's dying breath: {state.answer}!")
     print("No use in crying over spilled juice, will you keep fighting?"
 
+# This strucure prints an introduction to the game; added error handling
+FUNCTION run() -> None:
+  print("Welcome, hero! The Watermelons need your help!"(
+  print("Guess the secret word to set them free!")
+  Loop:
+    TRY:
+      _ = play_round(DEFAULT_SLICES)
+    EXCEPT Exception AS ex:
+      print(f"Error! {str(ex)}")
+    IF NOT _prompt_replay():
+      print("Good job! Let's play again sometime!")
+        BREAK
 
-
-
-
-# This will print a 'thank you' message if player does not want to continue
-
-# Close up with:
 IF__name__ == "__main__"
   run()
   ```
