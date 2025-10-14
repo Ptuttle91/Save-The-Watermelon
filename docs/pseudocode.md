@@ -65,6 +65,46 @@ def is_win (state:GameState) -> bool:
 def is_lose(state: GameState) -> bool:
   return state.slices <= 0
 ```
-#src /game.py
+
+# src /game.py
 ## UI/ux portion, prompts, input validation
-(define each round of play, prompts for loading word pools, etc.)
+
+```python
+from .logic import (
+  GameState, init_state, masked_word, already_guessed, apply_guess, is_win, is_lose
+)
+from .words import load_words, choose_answer
+
+default_slices = 7
+word_file = "data/words.txt" # can change to 'None' if we want to use default/test dictionary
+
+def _prompt_guess() ->
+  while True:
+    raw = input ("Please enter a single letter (A through Z): ").strip()
+    if len(raw) !=1:
+      print("Error: Invalid Input. Please enter one letter at a time.")
+      continue
+    ch = raw.lower()
+    if not ("a" <= ch <="z"):
+      print("Error: Please enter a valid letter from the alphabet. A-Z only.)
+      continue
+    return ch
+
+def _prompt_replay() -> bool:
+  while True:
+    raw = input ("Play Again? (y/n): ").strip().lower()
+    if raw in ("y", "yes"): return True
+    if raw in ("n", "no"): return False
+    Print("Error: Please enter a valid input: Y or N.")
+
+def play_turn(slices: int = DEFAULT_SLICES) -> str:
+  words = load_words(word_file) # note: Can use load_words(none) to use default list in testing.
+  ans = choose_answer(words)
+  state: GameState = init_state(ans, slices)
+
+  while True:
+    print("\nSave the Watermelon!!")
+    print(f"Word: {masked_word(state)}")
+
+
+
