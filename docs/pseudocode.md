@@ -1,1 +1,53 @@
+# Pseudocode
+
+* This must use the standard library only. To achieve this I am focusing on random, pathlib, and dataclasses.
+* We will keep the logic.py file print free so it can be tested effectively without potential outlier errors.
+* Input fuction must be simple and clean.
+* the core parts of the game must be shown and updated after each attempt (slices, attempts, etc.)
+
+## src/logic.py
+### The core mechanics and data structuring of the system. No outputs
+
+I am using dataclass to keep this neat and lightweight.
+
+```python
+
+DATASTRUCT GameState:
+  # The word, all lower case
+  answer: string
+  # The system used for masking and revealing letters
+  correct_tries:list[string]
+  # The letters player has already attempted
+  guessed: set[string]
+  # The amount of 'slices' left
+  slices: int
+  # The maximum value of 'slices' used in the ui.
+  total_slices: int
+
+FUNCTION init_state(answer: string, slices: int) -> GameState:
+  mask=['_'] * len(answer)
+  RETURN GameState(
+        answer=answer,
+        correct_tries=mask,
+        guessed=empty set,
+        slices=slices,
+        total_slices=slices
+    )
+
+# A helper built for the display. Applies an underscore per length of answer.
+Function masked_word(state:GameState) -> string:
+  RETURN join_with_spaces(state.correct_tries)
+
+# This checks input for duplicate attempts
+FUNCTION already_guessed(state: GameState, letter: string) -> bool:
+    RETURN letter IN state.guessed
+
+# This helps set the true/false/duplicate status for the input attempts
+# This will stop a duplicate entry from costing a slice
+# This will reveal all letters in answer matching output without costing a 'slice'
+# This will incur a cost of the slice if input = false/falls into else
+#T This will call a win-state if _ are all cleared out
+# This will call a lose-state when slices = 0 
+
+```
 
