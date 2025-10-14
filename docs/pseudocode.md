@@ -124,6 +124,11 @@ CONST DEFAULT_SLICES = 7
 #change to = None to force switch to default library
 CONST WORD_FILE = "data/words.txt"
 
+# This strucure prints an introduction to the game
+FUNCTION run() -> None:
+  print("Welcome, hero! The Watermelons need your help!"(
+  print("Guess the secret word to set them free!")
+
 # This structure creates and validate player input (a-z, length of input, etc.)
 FUNCTION _prompt_guess() -> string:
   LOOP:
@@ -170,20 +175,20 @@ LOOP:
   apply_guess(state, letter)
   after = state.slices
 
-  # This will be the input feedback for a correct/incorrect guess
+  # This handles the input and prints feedback for a correct/incorrect guess
   IF after == before AND letter IN state.answer:
     print(f"Well done! '{letter}' brings us one step closer!")
   ELIF after < before:
     print(f"Oh no! '{letter}' isn't in the word, they're getting closer to the watermelon!")
 
-  # This will be the print series for a win state
+  # This is the print output for a win state
   IF is_win(state):
     print("Congratulations!")
     print("You are a hero to watermelons everywhere!")
     print(f"The Secret Word was: {state.answer}")
     print("Will you keep fighting?")
 
-  # This will be the print series for a lose state
+  # This is the print output for a lose state
   IF is_lose(state):
     print("Oh No!")
     print("The Watermelon has been SLICED!")
@@ -192,7 +197,7 @@ LOOP:
 
 
 
-# This will print a Fun introduction to the game
+
 
 # This will print a 'thank you' message if player does not want to continue
 
