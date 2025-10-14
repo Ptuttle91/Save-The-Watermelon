@@ -43,10 +43,23 @@ FUNCTION already_guessed(state: GameState, letter: string) -> bool:
     RETURN letter IN state.guessed
 
 # This helps set the true/false/duplicate status for the input attempts
-# This will stop a duplicate entry from costing a slice
+FUNCTION apply_guess(state: GameState, letter: string) -> None:
+  # This stops a duplicate entry from costing a slice
+  IF letter IN state.guessed:
+    RETURN
+  # This adds guessed letter to the word bank
+  ADD letter TO state.guessed
+
+
+
+
+
 # This will reveal all letters in answer matching output without costing a 'slice'
+
 # This will incur a cost of the slice if input = false/falls into else
+
 #T This will call a win-state if _ are all cleared out
+
 # This will call a lose-state when slices = 0 
 
 ```
