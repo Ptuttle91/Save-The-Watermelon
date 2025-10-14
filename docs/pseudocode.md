@@ -149,11 +149,18 @@ FUNCTION play_round(slices: int = DEFAULT_SLICES) -> string:
     answer = choose_answer(word_list)
     state = init_state(answer, slices)
 
-# This will be the print series that displays:
-# * Fun Tagline
-# * Masked word
-# * Letters Attempted
-# * Guesses Left
+  # This is the print series that displays the title and the UI.
+LOOP:
+  print("")
+  print("Save the Watermelon!")
+  print(f"Secret Word: " + masked_word(state))
+  print(f"Slices: {state.slices} out of {state.total_slices}")
+  IF state.guessed IS empty:
+    print("Guessed Letters: ")
+  ELSE:
+    print("Guessed Letters: " + join_sorted_by_comma(state.guessed))
+
+    letter = _prompt_guess()
 
 # This will be the input feedback for a correct/incorrect guess
 
