@@ -102,3 +102,39 @@ FUNCTION choose_answer(words: list[string[, rng: Random | None) -> string:
   r = rng IF rng NOT None ELSE global_random
   RETURN r.choice(words)
 ```
+## src/game.pt
+### This will hold the loop to cycle through turns AND hold the input validation
+* This should be the only section to print or read player input.
+* UX - make sure already guessed letters are sorted and always displayed.
+* UX - Heed spacing for visual clarity
+* UX - Ensure that outcome of input is clearly stated and fun.
+
+```python
+# This will hold import FROM logic
+# This will hold import FROM words
+# This will validate the input (a-z, length of input, etc.)
+# This will declare constants for default value of slices
+# This will declare the constant from a word file or the default
+
+# This will build the functions of player input
+# This will build the function prompt to replay after win or lose state
+
+# This will be the print series that displays:
+# * Fun Tagline
+# * Masked word
+# * Letters Attempted
+# * Guesses Left
+
+# This will be the input feedback for a correct/incorrect guess
+
+# This will be the print series for a win state
+# This will be the print series for a lose state
+
+# This will print a Fun introduction to the game
+
+# This will print a 'thank you' message if player does not want to continue
+
+# Close up with:
+IF__name__ == "__main__"
+  run()
+  ```
