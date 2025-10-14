@@ -124,21 +124,30 @@ CONST DEFAULT_SLICES = 7
 #change to = None to force switch to default library
 CONST WORD_FILE = "data/words.txt"
 
-# This structure will create and validate player input (a-z, length of input, etc.)
+# This structure creates and validate player input (a-z, length of input, etc.)
 FUNCTION _prompt_guess() -> string:
   LOOP:
     raw = input("Enter a single letter to guess: ").strip()
     IF len(raw) != 1:
-      print("Error: Please enter one character at a time.")
+      print("Error: Invalid Input. Please enter one character at a time.")
       continue
     ch = to_lower(raw)
     IF ch NOT IN 'a'.. 'z':
-      print("Error: Only letters A-Z can be accepted.")
+      print("Error: Invalid Input. Only letters A-Z can be accepted.")
     RETURN ch
 
+# These will build the function to replay after win or lose state
+FUNCTION _prompt_replay() -> bool:
+    LOOP:
+        raw = input("Would you like to play again? (y/n): ").strip().lower()
+        IF raw IN ["y","yes"]: RETURN True
+        IF raw IN ["n","no"]:  RETURN False
+        print("Error: Invalid Input. Please enter 'y' or 'n'.")
 
-
-# This will build the function prompt to replay after win or lose state
+FUNCTION play_round(slices: int = DEFAULT_SLICES) -> string: 
+    word_list = load_words(WORD_FILE)
+    answer = choose_answer(word_list)
+    state = init_state(answer, slices)
 
 # This will be the print series that displays:
 # * Fun Tagline
