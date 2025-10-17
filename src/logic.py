@@ -1,4 +1,3 @@
-```python
 #This is the core game logic for 'Save the Watermelon'
 #This module holds the GameState and its mutables.
 
@@ -53,7 +52,3 @@ def is_win(state: GameState) -> bool:
 def is_lose(state: GameState) -> bool:
   # This declares the game as lost if the active slice/incorrect guess counter reaches 0 or less.
   return state.slices <=0
-
-
-
-```
