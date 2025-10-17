@@ -30,4 +30,9 @@ def load_words (path: str | None = None) -> list[str]:
     words = list(_DEFAULT_WORDS)
   return words
 
+def choose_answer(words: list[str], rng: random.Random | none = none) ->str:
+  #This function will pick a word randomly from the word bank.
+  r = rng or random
+  return r.choice(words)
+
 ```
