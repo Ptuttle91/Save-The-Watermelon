@@ -3,7 +3,7 @@
 # It will hold the following functions:
 # * Initiate play/start game
 # * Guess input
-# * Connect with word.py to path to word file
+# * Connect with words.py to path to word file
 # * Replay option
 # * Maintain the structure of each round/loop
 
@@ -19,7 +19,7 @@ from logic import (
     is_win,
     is_lose,
 )
-from word import load_words, choose_answer
+from words import load_words, choose_answer
 
 DEFAULT_SLICES = 7
 WORD_FILE = "data/words.txt"
