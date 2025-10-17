@@ -32,11 +32,12 @@ def _prompt_guess() -> str:
         if len(raw) != 1:
             print("Error: Invalid Input. Please enter one character at a time.")
             continue
+
         ch = raw.lower()
         if not ("a" <= ch <= "z"):
             print("Error: Invalid Input. Only letters A-Z can be accepted.")
             continue
-    return ch
+        return ch
 
 def _prompt_replay() -> bool:
     # This is the prompt for to replay
@@ -53,15 +54,14 @@ def _words_source() -> list[str]:
     path = WORD_FILE if Path(WORD_FILE).exists() else None
     return load_words(path)
 
-
 def play_round(slices: int = DEFAULT_SLICES) -> str:
     # This will draw the word ino the gamestate, and;
     # This will evaluate each round for a win or lose state.
-    words = _words_sources()
+    words = _words_source()
     answer = choose_answer(words)
     state: GameState = init_state(answer, slices)
 
-    while true:
+    while True:
         print(f"Secret Word:   {masked_word(state)}")
         print(f"Slices remaining: {state.slices}/{state.total_slices}")
         print("Guessed Letters:", ", ".join(sorted(state.guessed)) if state.guessed else " ")
@@ -70,31 +70,33 @@ def play_round(slices: int = DEFAULT_SLICES) -> str:
 
         if already_guessed(state, letter):
         # This will provide feedback for letters already guessed.
-            print("' {letter} ' has already been guessed! Please try another")
+            print(f"'{letter}' has already been guessed! Please try another.")
             continue
 
         before = state.slices
         apply_guess(state, letter)
         after = state.slices
 
-    if after == before and letter in state.answer:
-        print(f"Well done! '{letter}' is a match!")
-    elif after < before:
-        print(f"Oh no! '{letter}' isn't in the word, they're getting closer to the watermelon!")
+        if after == before and letter in state.answer:
+            print(f"Well done! '{letter}' is a match!")
+        elif after < before:
+            print(f"Oh no! '{letter}' isn't in the word, they're getting closer to the watermelon!")
 
-    if is_win(state):
-        # This provides the output for a win state.
-        print("Congratulations!")
-        print("You are a hero to watermelons everywhere!")
-        print(f"The Secret Word was: {state.answer}")
-        print("Will you keep fighting?")
+        if is_win(state):
+            # This provides the output for a win state.
+            print("Congratulations!")
+            print("You are a hero to watermelons everywhere!")
+            print(f"The Secret Word was: {state.answer}")
+            print("Will you keep fighting?")
+            return "win"
 
-    if is_lose(state):
-        # This provides the output for a lose state.
-        print("Oh No!")
-        print("The Watermelon has been SLICED!")
-        print("The secret word was revealed in it's dying breath: {state.answer}!")
-        print("No use in crying over spilled juice, will you keep fighting?")
+        if is_lose(state):
+            # This provides the output for a lose state.
+            print("Oh No!")
+            print("The Watermelon has been SLICED!")
+            print("The secret word was revealed in it's dying breath: {state.answer}!")
+            print("No use in crying over spilled juice, will you keep fighting?")
+            return "lose"
 
 def run() -> None:
     # This is the main loop with an introduction to start the game.
