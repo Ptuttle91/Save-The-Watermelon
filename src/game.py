@@ -93,7 +93,7 @@ def play_round(slices: int = DEFAULT_SLICES) -> str:
             # This provides the output for a lose state.
             print("Oh No!")
             print("The Watermelon has been SLICED!")
-            print("The secret word was revealed in it's dying breath: {state.answer}!")
+            print(f"The secret word was revealed in it's dying breath: {state.answer}!")
             print("No use in crying over spilled juice, will you keep fighting?")
             return "lose"
 
