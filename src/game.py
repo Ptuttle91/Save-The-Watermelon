@@ -10,7 +10,7 @@
 from __future__ import annotations
 from pathlib import Path
 
-from .logic import (
+from logic import (
     GameState,
     init_state,
     masked_word,
@@ -19,7 +19,7 @@ from .logic import (
     is_win,
     is_lose,
 )
-from .words import load_words, choose_answer
+from word import load_words, choose_answer
 
 DEFAULT_SLICES = 7
 WORD_FILE = "data/words.txt"
@@ -27,20 +27,20 @@ WORD_FILE = "data/words.txt"
 
 def _prompt_guess() -> str:
     # This evaluates the player input. If valid, process. If invalid prompt & return to input.
-    while true:
-     raw = input("Enter a letter to guess!: ").strip()
-     if len(raw) != 1:
-        print("Error: Invalid Input. Please enter one character at a time.")
-        continue
-    ch = raw.lower()
-    if not ("a" <= ch <= "z"):
-        print("Error: Invalid Input. Only letters A-Z can be accepted.")
-        continue
+    while True:
+        raw = input("Enter a letter to guess!: ").strip()
+        if len(raw) != 1:
+            print("Error: Invalid Input. Please enter one character at a time.")
+            continue
+        ch = raw.lower()
+        if not ("a" <= ch <= "z"):
+            print("Error: Invalid Input. Only letters A-Z can be accepted.")
+            continue
     return ch
 
 def _prompt_replay() -> bool:
     # This is the prompt for to replay
-    while true:
+    while True:
         raw = input("Would you like to play again? (y/n): ").strip().lower()
         if raw in ("y", "yes"):
             return True
@@ -52,6 +52,7 @@ def _words_source() -> list[str]:
     # This will load words from the designated file. Defaults to build-in word bank if fails.
     path = WORD_FILE if Path(WORD_FILE).exists() else None
     return load_words(path)
+
 
 def play_round(slices: int = DEFAULT_SLICES) -> str:
     # This will draw the word ino the gamestate, and;
@@ -65,16 +66,16 @@ def play_round(slices: int = DEFAULT_SLICES) -> str:
         print(f"Slices remaining: {state.slices}/{state.total_slices}")
         print("Guessed Letters:", ", ".join(sorted(state.guessed)) if state.guessed else " ")
 
-    letter = _prompt_guess()
+        letter = _prompt_guess()
 
-    if already_guessed(state, letter):
+        if already_guessed(state, letter):
         # This will provide feedback for letters already guessed.
-        print("' {letter} ' has already been guessed! Please try another")
-        continue
+            print("' {letter} ' has already been guessed! Please try another")
+            continue
 
-    before = state.slices
-    apply_guess(state, letter)
-    after = state.slices
+        before = state.slices
+        apply_guess(state, letter)
+        after = state.slices
 
     if after == before and letter in state.answer:
         print(f"Well done! '{letter}' is a match!")
