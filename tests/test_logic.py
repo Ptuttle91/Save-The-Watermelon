@@ -7,7 +7,7 @@ if str(ROOT) not in sys.path:
 
 import unittest
 
-from logic import (
+from src.logic import (
     init_state,
     masked_word,
     already_guessed,
@@ -16,7 +16,7 @@ from logic import (
     is_lose,
 )
 
-from word import load_words
+from src.word import load_words
 
 class TestLogic(unittest.TestCase):
     def test_init_sets_mask_and_slices(self):
