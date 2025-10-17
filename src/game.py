@@ -48,10 +48,7 @@ def _prompt_replay() -> bool:
             return False
         print("Error: Invalid Input. Please enter 'y' or 'n'.")
 
-def _words_source() -> list[str]:
-    # This will load words from the designated file. Defaults to build-in word bank if fails.
-    path = WORD_FILE if Path(WORD_FILE).exists() else None
-    return load_words(path)
+from src.words import load_words, choose_answer
 
 def play_round(slices: int = 7) -> str:
     # This will draw the word ino the gamestate, and;
