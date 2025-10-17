@@ -93,13 +93,22 @@ def play_round(slices: int = DEFAULT_SLICES) -> str:
     print("Oh No!")
     print("The Watermelon has been SLICED!")
     print("The secret word was revealed in it's dying breath: {state.answer}!")
-    print("No use in crying over spilled juice, will you keep fighting?"
+    print("No use in crying over spilled juice, will you keep fighting?")
 
 def run() -> None:
   # This is the main loop with an introduction to start the game.
   print("Welcome, hero! The Watermelons need your help!")
   print("Guess the secret word to set them free!")
+    while True:
+        try:
+            play_round(DEFAULT_SLICES)
+        except Exception as ex:
+            print(f"[Error] {ex}")
+        if not _prompt_replay():
+          print("Good job! Let's play again sometime!")
+            break
 
-  
+if __name__ == "__main__":
+    run()
 
 ```
