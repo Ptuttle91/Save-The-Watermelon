@@ -53,10 +53,10 @@ def _words_source() -> list[str]:
     path = WORD_FILE if Path(WORD_FILE).exists() else None
     return load_words(path)
 
-def play_round(slices: int = DEFAULT_SLICES) -> str:
+def play_round(slices: int = 7) -> str:
     # This will draw the word ino the gamestate, and;
     # This will evaluate each round for a win or lose state.
-    words = _words_source()
+    words = load_words()
     answer = choose_answer(words)
     state: GameState = init_state(answer, slices)
 
@@ -112,4 +112,3 @@ def run() -> None:
 
 if __name__ == "__main__":
     run()
-
