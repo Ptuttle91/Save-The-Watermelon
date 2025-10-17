@@ -4,12 +4,12 @@
 ### * Defines a function to select a random word from the bank.
 
 ```python
-__from__ future import annotations
+from __future__ import annotations
 import random
 from pathlib import Path
 
 _DEFAULT_WORDS: list[str] = [ 
-  "snail", "watermelon", "cat", "banana", "wolverine", "orange", "badger", "grape", "antelope", "calamansi",                            
+  "snail", "watermelon", "cat", "banana", "wolverine", "orange", "badger", "grape", "antelope", "calamansi", "rat", "tangerine",                            
 ]
 
 def load_words (path: str | None = None) -> list[str]:
