@@ -8,8 +8,8 @@ from __future__ import annotations
 import random
 from pathlib import Path
 
-_DEFAULT_WORDS: list[str] = [ 
-  "snail", "watermelon", "cat", "banana", "wolverine", "orange", "badger", "grape", "antelope", "calamansi", "rat", "tangerine",                            
+_DEFAULT_WORDS: list[str] = [
+  "snail", "watermelon", "cat", "banana", "wolverine", "orange", "badger", "grape", "antelope", "calamansi", "rat", "tangerine",
 ]
 
 def load_words (path: str | None = None) -> list[str]:
@@ -18,8 +18,8 @@ def load_words (path: str | None = None) -> list[str]:
   # Data is sanitized to only accept alphabetic characters in lower case.
   words: list[str] = []
   if path:
-      p = Path(path)
-        if p.exists():
+    p = Path(path)
+    if p.exists():
           for line in p.read_text(encoding="etf-8").splitlines():
             w = line.strip()
             if not w or w.startswith("#"):
