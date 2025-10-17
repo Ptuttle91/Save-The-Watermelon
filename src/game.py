@@ -1,4 +1,3 @@
-```python
 # This is the main game file. It will connect the logic and word files and provide the prompts and player outputs.
 # It will hold the following functions:
 # * Initiate play/start game
@@ -113,4 +112,4 @@ def run() -> None:
 
 if __name__ == "__main__":
     run()
-```
+
