@@ -9,7 +9,7 @@
 from __future__ import annotations
 from pathlib import Path
 
-from logic import (
+from src.logic import (
     GameState,
     init_state,
     masked_word,
@@ -18,7 +18,7 @@ from logic import (
     is_win,
     is_lose,
 )
-from words import load_words, choose_answer
+from src.words import load_words, choose_answer
 
 DEFAULT_SLICES = 7
 WORD_FILE = "data/words.txt"
