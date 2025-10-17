@@ -48,6 +48,30 @@ def _prompt_replay() -> bool:
       return False
     print("Error: Invalid Input. Please enter 'y' or 'n'.")
 
+def _words_source() -> list[str]:
+  # This will load words from the designated file. Defaults to build-in word bank if fails.
+  path = WORD_FILE if Path(WORD_FILE).exists() else None
+  return load_words(path)
+
+def play_round(slices: int = DEFAULT_SLICES) -> str:
+  # This will draw the word ino the gamestate, and;
+  # This will evaluate each round for a win or lose state.
+  words = _words_sources()
+  answer = choose_answer(words)
+  state: GameState = init_state(answer, slices)
+  
+  while true:
+    print(f"Secret Word:   {masked_word(state)}")
+    print(f"Slices remaining: {state.slices}/{state.total_slices}")
+    print("Guessed Letters:", ", ".join(sorted(state.guessed)) if state.guessed else " ")
+
+  letter = _prompt_guess()
+
+  if already_guessed(state, letter):
+    # This will provide feedback for letters already guessed.
+    print("' {letter} ' has already been guessed! Please try another")
+    continue
+
 
 
 ```
