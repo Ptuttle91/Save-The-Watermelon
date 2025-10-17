@@ -67,18 +67,39 @@ def play_round(slices: int = DEFAULT_SLICES) -> str:
 
   letter = _prompt_guess()
 
-    if already_guessed(state, letter):
-      # This will provide feedback for letters already guessed.
-      print("' {letter} ' has already been guessed! Please try another")
-      continue
+  if already_guessed(state, letter):
+    # This will provide feedback for letters already guessed.
+    print("' {letter} ' has already been guessed! Please try another")
+    continue
 
-    before = state.slices
-    apply_guess(state, letter)
-    after = state.slices
+  before = state.slices
+  apply_guess(state, letter)
+  after = state.slices
 
-    if after == before and letter in state.answer:
-      print(f"Well done! '{letter}' is a match!")
-    elif after < before:
-      print(f"Oh no! '{letter}' isn't in the word, they're getting closer to the watermelon!")
+  if after == before and letter in state.answer:
+    print(f"Well done! '{letter}' is a match!")
+  elif after < before:
+    print(f"Oh no! '{letter}' isn't in the word, they're getting closer to the watermelon!")
+
+  if is_win(state):
+    # This provides the output for a win state.
+    print("Congratulations!")
+    print("You are a hero to watermelons everywhere!")
+    print(f"The Secret Word was: {state.answer}")
+    print("Will you keep fighting?")
+
+  if is_lose(state):
+    # This provides the output for a lose state.
+    print("Oh No!")
+    print("The Watermelon has been SLICED!")
+    print("The secret word was revealed in it's dying breath: {state.answer}!")
+    print("No use in crying over spilled juice, will you keep fighting?"
+
+def run() -> None:
+  # This is the main loop with an introduction to start the game.
+  print("Welcome, hero! The Watermelons need your help!")
+  print("Guess the secret word to set them free!")
+
+  
 
 ```
