@@ -3,6 +3,9 @@
 CISC 179 Final Project
 By: Patrick Tuttle
 
+About: This project is the CISC 179 final project. The goal is to create a terminal based word guessing game.
+
+
 ## Requirements:
 * Windows 10 or later
 * Python 3.10+ installed
