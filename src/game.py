@@ -67,11 +67,18 @@ def play_round(slices: int = DEFAULT_SLICES) -> str:
 
   letter = _prompt_guess()
 
-  if already_guessed(state, letter):
-    # This will provide feedback for letters already guessed.
-    print("' {letter} ' has already been guessed! Please try another")
-    continue
+    if already_guessed(state, letter):
+      # This will provide feedback for letters already guessed.
+      print("' {letter} ' has already been guessed! Please try another")
+      continue
 
+    before = state.slices
+    apply_guess(state, letter)
+    after = state.slices
 
+    if after == before and letter in state.answer:
+      print(f"Well done! '{letter}' is a match!")
+    elif after < before:
+      print(f"Oh no! '{letter}' isn't in the word, they're getting closer to the watermelon!")
 
 ```
