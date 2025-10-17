@@ -19,7 +19,7 @@ def load_words (path: str | None = None) -> list[str]:
   if path:
     p = Path(path)
     if p.exists():
-          for line in p.read_text(encoding="etf-8").splitlines():
+          for line in p.read_text(encoding="utf-8").splitlines():
             w = line.strip()
             if not w or w.startswith("#"):
               continue
