@@ -43,4 +43,14 @@ def apply_guess(state: Gamestate, letter: str) -> None:
         state.correct_tries[i] = letter
 else:
   state.slices -= 1
+
+def is_win(state: GameState) -> bool:
+  # This declares the game as won if it no longer detects an underscore in the variable for the random word.
+  return "_" no in state.correct_tries
+
+def is_lose(state: GameState) -> bool:
+  # This declares the game as lost if the active slice/incorrect guess counter reaches 0 or less.
+  return state.slices <=0
+
+
 ```
