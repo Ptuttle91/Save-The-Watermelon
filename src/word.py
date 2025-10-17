@@ -18,7 +18,7 @@ def load_words (path: str | None = None) -> list[str]:
   # Data is sanitized to only accept alphabetic characters in lower case.
   words: list[str] = []
   if path:
-      p = path(path)
+      p = Path(path)
         if p.exists():
           for line in p.read_text(encoding="etf-8").splitlines():
             w = line.strip()
@@ -30,7 +30,7 @@ def load_words (path: str | None = None) -> list[str]:
     words = list(_DEFAULT_WORDS)
   return words
 
-def choose_answer(words: list[str], rng: random.Random | none = none) ->str:
+def choose_answer(words: list[str], rng: random.Random | None = None) ->str:
   #This function will pick a word randomly from the word bank.
   r = rng or random
   return r.choice(words)
