@@ -3,7 +3,6 @@
 ### * Defines function for loading a new word bank.
 ### * Defines a function to select a random word from the bank.
 
-```python
 from __future__ import annotations
 import random
 from pathlib import Path
@@ -34,5 +33,3 @@ def choose_answer(words: list[str], rng: random.Random | None = None) ->str:
   #This function will pick a word randomly from the word bank.
   r = rng or random
   return r.choice(words)
-
-```
