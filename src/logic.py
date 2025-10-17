@@ -1,7 +1,7 @@
 ```python
 
-#This is the core game mechanics for 'Save the Watermelon'
-#This module holds the logic, mainly the GameState information and its mutables.
+#This is the core game logic for 'Save the Watermelon'
+#This module holds the GameState and its mutables.
 
 from __future__ import annotations
 from dataclasses import dataclass, field
@@ -33,5 +33,14 @@ def masked_word(state: GameState) -> str:
 def already_guessed(state: GameState, letter: str) -> bool:
   #This checks for duplicate guesses 
 
-
+def apply_guess(state: Gamestate, letter: str) -> None:
+  # This applies the guessed letter to the secret word, and handles accounting to correct/duplicate/wrong
+  if letter in state.guessed:
+    return
+  state.guessed.add(letter)
+    for i, ch in enumerate(state.answer):
+      if ch == letter:
+        state.correct_tries[i] = letter
+else:
+  state.slices -= 1
 ```
