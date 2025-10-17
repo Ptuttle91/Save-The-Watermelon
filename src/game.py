@@ -23,7 +23,7 @@ from .words import load_words, choose_answer
 
 DEFAULT_SLICES = 7
 WORD_FILE = "data/words.txt"
-# words.py should catch if text file 
+# words.py should catch if text file has any issues. If so, returns the default library.
 
 def _prompt_guess() => str:
   # This evaluates the player input. If valid, process. If invalid prompt & return to input.
@@ -37,6 +37,16 @@ def _prompt_guess() => str:
       print("Error: Invalid Input. Only letters A-Z can be accepted.")
       continue
     return ch
+
+def _prompt_replay() -> bool:
+  # This is the prompt for to replay
+  while true:
+    raw = input (Would you like to play again? (y/n): ").strip().lower()
+    if raw in ("y", "yes"):
+      return True
+    if raw in ("n", "no"):
+      return False
+    print("Error: Invalid Input. Please enter 'y' or 'n'.")
 
 
 
